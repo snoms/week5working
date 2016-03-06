@@ -13,6 +13,8 @@
 		CC4879601C89BFA40001EB25 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC48795E1C89BFA40001EB25 /* Main.storyboard */; };
 		CC4879621C89BFA40001EB25 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC4879611C89BFA40001EB25 /* Assets.xcassets */; };
 		CC4879651C89BFA40001EB25 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC4879631C89BFA40001EB25 /* LaunchScreen.storyboard */; };
+		CC48796D1C89D20F0001EB25 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC48796C1C89D20F0001EB25 /* TodoCell.swift */; };
+		CC48796F1C89F1540001EB25 /* DataClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC48796E1C89F1540001EB25 /* DataClasses.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		CC4879611C89BFA40001EB25 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CC4879641C89BFA40001EB25 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CC4879661C89BFA40001EB25 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC48796C1C89D20F0001EB25 /* TodoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
+		CC48796E1C89F1540001EB25 /* DataClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataClasses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +63,8 @@
 				CC4879581C89BFA40001EB25 /* AppDelegate.swift */,
 				CC48795A1C89BFA40001EB25 /* MasterViewController.swift */,
 				CC48795C1C89BFA40001EB25 /* DetailViewController.swift */,
+				CC48796E1C89F1540001EB25 /* DataClasses.swift */,
+				CC48796C1C89D20F0001EB25 /* TodoCell.swift */,
 				CC48795E1C89BFA40001EB25 /* Main.storyboard */,
 				CC4879611C89BFA40001EB25 /* Assets.xcassets */,
 				CC4879631C89BFA40001EB25 /* LaunchScreen.storyboard */,
@@ -142,6 +148,8 @@
 				CC48795D1C89BFA40001EB25 /* DetailViewController.swift in Sources */,
 				CC48795B1C89BFA40001EB25 /* MasterViewController.swift in Sources */,
 				CC4879591C89BFA40001EB25 /* AppDelegate.swift in Sources */,
+				CC48796F1C89F1540001EB25 /* DataClasses.swift in Sources */,
+				CC48796D1C89D20F0001EB25 /* TodoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
