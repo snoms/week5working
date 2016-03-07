@@ -14,6 +14,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     var passedList: ToDoList?
     var todoArray = [String]()
+    
     // Todo: make todoArray the list which belongs to the todoList identifier
     
     var detailItem: AnyObject? {
@@ -37,6 +38,9 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         restorationIdentifier = "DetailView"
         restorationClass = DetailViewController.self
         inputTodo.delegate = self
+        if let passedList = ToDoList.loadSaved() {
+        print(passedList)
+        }
         //self.todoTitle.title = "test"
         //tableView.rowHeight = UITableViewAutomaticDimension
         // Do any additional setup after loading the view, typically from a nib.
@@ -50,50 +54,50 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     
-    func writeData() {
-//        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-//            
-//            let path: String = directory + "/todoliststorage.txt"
-//            let text = todoArray.joinWithSeparator("^")
-//            do {
-//                try text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
-//            }
-//            catch {
-//                // Error handling here.
-//                print("error while writing list to storage")
-//                print(path)
-//            }
-//          }
-            let savedData = NSKeyedArchiver.archivedDataWithRootObject(TodoLists)
-            let defaults = NSUserDefaults.standardUserDefaults()
-            defaults.setObject(savedData, forKey: "people")
-    }
-    
-    func readData() {
-//        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-//            
-//            let path: String = directory + "/todoliststorage.txt"
-//            print(path)
-//            
-//            // Reading todo list from test.txt
-//            do {
-//                let loadedFile = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-//                todoArray = loadedFile.characters.split{$0 == "^" || $0 == "\r\n"}.map(String.init)
-//                
-//            } catch {
-//                // Error handling here.
-//                print("error while reading stored list")
-//            }
-//        } else {
-//            // Error handling here.
-//            print("error while reading stored list")
+//    func writeData() {
+////        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+////            
+////            let path: String = directory + "/todoliststorage.txt"
+////            let text = todoArray.joinWithSeparator("^")
+////            do {
+////                try text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
+////            }
+////            catch {
+////                // Error handling here.
+////                print("error while writing list to storage")
+////                print(path)
+////            }
+////          }
+//            let savedData = NSKeyedArchiver.archivedDataWithRootObject(self)
+//            let defaults = NSUserDefaults.standardUserDefaults()
+//            defaults.setObject(savedData, forKey: "list")
+//        //self.passedList?.encodeWithCoder(NSCoder)
+//    }
+//    
+//    func readData() {
+////        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
+////            
+////            let path: String = directory + "/todoliststorage.txt"
+////            print(path)
+////            
+////            // Reading todo list from test.txt
+////            do {
+////                let loadedFile = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+////                todoArray = loadedFile.characters.split{$0 == "^" || $0 == "\r\n"}.map(String.init)
+////                
+////            } catch {
+////                // Error handling here.
+////                print("error while reading stored list")
+////            }
+////        } else {
+////            // Error handling here.
+////            print("error while reading stored list")
+////        }
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        if let savedLists = defaults.objectForKey("list") as? NSData {
+//            passedList = NSKeyedUnarchiver.unarchiveObjectWithData(savedLists) as? ToDoList
 //        }
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let savedLists = defaults.objectForKey("list") as? NSData {
-            passedList = NSKeyedUnarchiver.unarchiveObjectWithData(savedLists) as? ToDoList
-        }
-    }
+//    }
 
     func invalidChar() {
         let charAlert = UIAlertController(title: "Error", message: "Invalid character: '^'", preferredStyle: UIAlertControllerStyle.Alert)
@@ -110,7 +114,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             UIAlertAction in
             NSLog("OK Pressed")
             self.passedList!.items.removeAll()
-            //self.writeData()
+            self.passedList!.save()
             //self.readData()
             self.tableView.reloadData()
         }
@@ -146,7 +150,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 if (textField.text?.characters.contains("^") == false) {
                     self.passedList!.addItem(textField.text!)
                     self.tableView.reloadData()
-                    //self.writeData()
+                    self.passedList!.save()
                 }
                 else {
                     self.invalidChar()
@@ -169,12 +173,12 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 inputTodo.text = ""
                 tableView.reloadData()
                 self.inputTodo.resignFirstResponder()
+                self.passedList!.save()
             }
             else {
                 invalidChar()
             }
         }
-        //writeData()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -197,7 +201,7 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if editingStyle == UITableViewCellEditingStyle.Delete {
             self.passedList!.items.removeAtIndex(indexPath.row)
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
-            writeData()
+            self.passedList!.save()
         }
     }
     

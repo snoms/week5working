@@ -12,7 +12,6 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
 
     var detailViewController: DetailViewController? = nil
     var objects = [AnyObject]()
-//    var list1 = todoList(name: "first list")
     var todoListArray: [ToDoList] = [ToDoList]()
     
     override func viewDidLoad() {
@@ -20,7 +19,7 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
         // Do any additional setup after loading the view, typically from a nib.
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
-
+        if let todoListArray = TodoLists.loadSaved() { print(todoListArray) }
 //        print(list1.name)
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
