@@ -20,8 +20,6 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
         self.navigationItem.leftBarButtonItem = self.editButtonItem()
         
         if let todoListArray = TodoLists.loadSaved() { print(todoListArray) }
-//        print(list1.name)
-        
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: "insertNewObject:")
         self.navigationItem.rightBarButtonItem = addButton
         if let split = self.splitViewController {
@@ -30,7 +28,6 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
         }
     }
 
-    
     override func viewWillAppear(animated: Bool) {
         self.clearsSelectionOnViewWillAppear = self.splitViewController!.collapsed
         super.viewWillAppear(animated)
@@ -42,7 +39,6 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
     }
 
     func insertNewObject(sender: AnyObject) {
-        
         let alert = UIAlertController(title: "New Todo list", message: "Please enter your list name here", preferredStyle: .Alert)
         // Add the text field. You can configure it however you need.
         alert.addTextFieldWithConfigurationHandler({ (textField) -> Void in
@@ -58,76 +54,35 @@ class MasterViewController: UITableViewController, UIAlertViewDelegate {
                 if lists.name == textField.text {
                     // TODO: Insert alert of duplicate. OK to go to DetailView with
                     print("error: Duplicate list exists")
-                    // pass todoLists[index] to DVC
                 }
             }
             var newList = ToDoList(name: textField.text!, items: [""])
-            
             self.todoListArray.append(newList)
             self.objects.insert(newList, atIndex: 0)
             let indexPath = NSIndexPath(forRow: 0, inSection: 0)
             self.tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-            print(self.todoListArray)
         }))
-        
         
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) {
             UIAlertAction in
             NSLog("Cancel Pressed")
-//            self.inputTodo.resignFirstResponder()
         }            // Present the alert.
         alert.addAction(cancelAction)
-        
         self.presentViewController(alert, animated: true, completion: nil)
-        
-        
-
-    }
-
-    func writeData() {
-        //        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-        //
-        //            let path: String = directory + "/todoliststorage.txt"
-        //            let text = todoArray.joinWithSeparator("^")
-        //            do {
-        //                try text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
-        //            }
-        //            catch {
-        //                // Error handling here.
-        //                print("error while writing list to storage")
-        //                print(path)
-        //            }
-        //          }
-        let savedData = NSKeyedArchiver.archivedDataWithRootObject(todoListArray)
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(savedData, forKey: "list")
     }
     
-    func readData() {
-        //        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-        //
-        //            let path: String = directory + "/todoliststorage.txt"
-        //            print(path)
-        //
-        //            // Reading todo list from test.txt
-        //            do {
-        //                let loadedFile = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-        //                todoArray = loadedFile.characters.split{$0 == "^" || $0 == "\r\n"}.map(String.init)
-        //
-        //            } catch {
-        //                // Error handling here.
-        //                print("error while reading stored list")
-        //            }
-        //        } else {
-        //            // Error handling here.
-        //            print("error while reading stored list")
-        //        }
-        let defaults = NSUserDefaults.standardUserDefaults()
-        
-        if let savedLists = defaults.objectForKey("list") as? NSData {
-            todoListArray = NSKeyedUnarchiver.unarchiveObjectWithData(savedLists) as! [ToDoList]
-        }
-    }
+// currently unused
+//    func writeData() {
+//        let savedData = NSKeyedArchiver.archivedDataWithRootObject(todoListArray)
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        defaults.setObject(savedData, forKey: "list")
+//    }
+//    func readData() {
+//        let defaults = NSUserDefaults.standardUserDefaults()
+//        if let savedLists = defaults.objectForKey("list") as? NSData {
+//            todoListArray = NSKeyedUnarchiver.unarchiveObjectWithData(savedLists) as! [ToDoList]
+//        }
+//    }
     
     // MARK: - Segues
 

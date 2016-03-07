@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class ToDoList: NSObject, NSCoding {
     var name: String
     var items: [String]
@@ -17,13 +16,6 @@ class ToDoList: NSObject, NSCoding {
         self.name = name
         self.items = items
     }
-    
-//    required convenience init?(coder decoder: NSCoder) {
-//        guard let items = decoder.decodeObjectForKey("items") as? [String]
-//            else {return nil}
-//        
-//        func initWithCoder(name: name, items: items)
-//    }
     
     required init(coder aDecoder: NSCoder) {
         name = aDecoder.decodeObjectForKey("name") as! String

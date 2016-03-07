@@ -25,12 +25,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func configureView() {
-        // Update the user interface for the detail item.
-    //    if let detail = self.detailItem {
-    //        if let label = self.detailDescriptionLabel {
-    //            label.text = detail.description
-    //        }
-    //    }
     }
     
     override func viewDidLoad() {
@@ -41,11 +35,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let passedList = ToDoList.loadSaved() {
         print(passedList)
         }
-        //self.todoTitle.title = "test"
-        //tableView.rowHeight = UITableViewAutomaticDimension
-        // Do any additional setup after loading the view, typically from a nib.
-        //readData()
-        // todo: set title to todoList identifier
     }
     
     override func didReceiveMemoryWarning() {
@@ -53,52 +42,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
         // Dispose of any resources that can be recreated.
     }
     
-    
-//    func writeData() {
-////        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-////            
-////            let path: String = directory + "/todoliststorage.txt"
-////            let text = todoArray.joinWithSeparator("^")
-////            do {
-////                try text.writeToFile(path, atomically: false, encoding: NSUTF8StringEncoding)
-////            }
-////            catch {
-////                // Error handling here.
-////                print("error while writing list to storage")
-////                print(path)
-////            }
-////          }
-//            let savedData = NSKeyedArchiver.archivedDataWithRootObject(self)
-//            let defaults = NSUserDefaults.standardUserDefaults()
-//            defaults.setObject(savedData, forKey: "list")
-//        //self.passedList?.encodeWithCoder(NSCoder)
-//    }
-//    
-//    func readData() {
-////        if let directory: String = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.AllDomainsMask, true).first {
-////            
-////            let path: String = directory + "/todoliststorage.txt"
-////            print(path)
-////            
-////            // Reading todo list from test.txt
-////            do {
-////                let loadedFile = try String(contentsOfFile: path, encoding: NSUTF8StringEncoding)
-////                todoArray = loadedFile.characters.split{$0 == "^" || $0 == "\r\n"}.map(String.init)
-////                
-////            } catch {
-////                // Error handling here.
-////                print("error while reading stored list")
-////            }
-////        } else {
-////            // Error handling here.
-////            print("error while reading stored list")
-////        }
-//        let defaults = NSUserDefaults.standardUserDefaults()
-//        if let savedLists = defaults.objectForKey("list") as? NSData {
-//            passedList = NSKeyedUnarchiver.unarchiveObjectWithData(savedLists) as? ToDoList
-//        }
-//    }
-
     func invalidChar() {
         let charAlert = UIAlertController(title: "Error", message: "Invalid character: '^'", preferredStyle: UIAlertControllerStyle.Alert)
         charAlert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Default, handler: nil))
@@ -204,26 +147,6 @@ class DetailViewController: UIViewController, UITableViewDelegate, UITableViewDa
             self.passedList!.save()
         }
     }
-    
-//    override func encodeRestorableStateWithCoder(coder: NSCoder) {
-//        if let passedList = passedList {
-//            coder.encodeObject(passedList, forKey: "passedList")
-//        }
-//        //2
-//        super.encodeRestorableStateWithCoder(coder)
-//    }
-//    
-//    override func decodeRestorableStateWithCoder(coder: NSCoder) {
-//     
-//        passedList = coder.decodeObjectOfClass(ToDoList.self, forKey: "passedList")
-//        super.decodeRestorableStateWithCoder(coder)
-//    }
-//
-//    override func applicationFinishedRestoringState() {
-//        guard let passedList = passedList else { return }
-//        passedList = 
-//    }
-    
 }
 
 extension DetailViewController: UIViewControllerRestoration {
